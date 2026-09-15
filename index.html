@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Quakescope | Earthquake Monitoring Platform</title>
+
+  <meta
+    name="description"
+    content="Quakescope is a real-time earthquake monitoring dashboard built with React, Vite, Leaflet, and the USGS Earthquake Catalog API."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- Background decoration -->
+  <div class="background-grid"></div>
+  <div class="glow glow-one"></div>
+  <div class="glow glow-two"></div>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <a href="#home" class="brand">
+      <span class="brand-icon">
+        <i class="fa-solid fa-wave-square"></i>
+      </span>
+      <span>Quake<span>scope</span></span>
+    </a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#features">Features</a>
+      <a href="#workflow">Workflow</a>
+      <a href="#technology">Technology</a>
+      <a href="#scope">Scope</a>
+    </nav>
+
+    <a
+      href="https://quakescope.vercel.app/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="nav-button"
+    >
+      View Live <i class="fa-solid fa-arrow-up-right-from-square"></i>
+    </a>
+  </header>
+
+  <main>
+
+    <!-- Hero Section -->
+    <section class="hero section" id="home">
+
+      <div class="hero-content reveal">
+        <div class="status-pill">
+          <span class="pulse-dot"></span>
+          LIVE EARTHQUAKE MONITORING
+        </div>
+
+        <h1>
+          Understand the
+          <span>Earth beneath</span>
+          you.
+        </h1>
+
+        <p class="hero-description">
+          Quakescope transforms global seismic data into an interactive,
+          understandable, and visually rich monitoring experience.
+        </p>
+
+        <div class="hero-actions">
+          <a
+            href="https://quakescope.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="primary-button"
+          >
+            Explore Live Dashboard
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+
+          <a
+            href="https://github.com/techtuber9988/quakescope"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="secondary-button"
+          >
+            <i class="fa-brands fa-github"></i>
+            View Source
+          </a>
+        </div>
+
+        <div class="hero-meta">
+          <div>
+            <strong>React 19</strong>
+            <span>Frontend</span>
+          </div>
+
+          <div>
+            <strong>USGS API</strong>
+            <span>Data Source</span>
+          </div>
+
+          <div>
+            <strong>Leaflet</strong>
+            <span>Mapping</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal">
+        <div class="visual-card">
+
+          <div class="visual-topbar">
+            <div class="window-controls">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+
+            <span class="visual-label">
+              <i class="fa-solid fa-satellite-dish"></i>
+              GLOBAL SEISMIC FEED
+            </span>
+
+            <span class="live-label">
+              <span class="pulse-dot"></span>
+              LIVE
+            </span>
+          </div>
+
+          <div class="map-preview">
+
+            <div class="map-lines"></div>
+
+            <div class="map-label label-one">NORTH AMERICA</div>
+            <div class="map-label label-two">EUROPE</div>
+            <div class="map-label label-three">ASIA</div>
+            <div class="map-label label-four">PACIFIC</div>
+
+            <div class="earthquake-marker marker-one">
+              <span></span>
+            </div>
+
+            <div class="earthquake-marker marker-two">
+              <span></span>
+            </div>
+
+            <div class="earthquake-marker marker-three">
+              <span></span>
+            </div>
+
+            <div class="earthquake-marker marker-four">
+              <span></span>
+            </div>
+
+            <div class="earthquake-marker marker-five">
+              <span></span>
+            </div>
+
+            <div class="map-overlay-card">
+              <div class="overlay-card-header">
+                <span class="mini-status"></span>
+                Selected Event
+              </div>
+
+              <h3>Seismic Activity</h3>
+
+              <div class="overlay-stat">
+                <span>Magnitude</span>
+                <strong>4.8</strong>
+              </div>
+
+              <div class="overlay-stat">
+                <span>Location</span>
+                <strong>Pacific Region</strong>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="visual-bottom">
+            <div class="bottom-stat">
+              <i class="fa-solid fa-chart-line"></i>
+              <div>
+                <strong>Live Data</strong>
+                <span>USGS Earthquake Feed</span>
+              </div>
+            </div>
+
+            <div class="bottom-stat">
+              <i class="fa-solid fa-filter"></i>
+              <div>
+                <strong>Smart Filters</strong>
+                <span>Magnitude & Time</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- About Section -->
+    <section class="section about-section" id="about">
+
+      <div class="section-heading reveal">
+        <span class="eyebrow">01 / THE PROJECT</span>
+        <h2>Making seismic data<br /><span>easier to understand.</span></h2>
+      </div>
+
+      <div class="about-grid">
+
+        <div class="about-text reveal">
+          <p class="large-text">
+            Earthquake information is often available through raw APIs,
+            technical dashboards, and complex datasets that are difficult
+            for ordinary users to interpret.
+          </p>
+
+          <p>
+            Quakescope addresses this problem by presenting earthquake
+            information through an interactive map, intuitive filters,
+            and detailed event information.
+          </p>
+
+          <p>
+            The application focuses on improving the discoverability and
+            visual understanding of global seismic activity.
+          </p>
+        </div>
+
+        <div class="problem-card reveal">
+          <div class="card-icon">
+            <i class="fa-solid fa-earth-americas"></i>
+          </div>
+
+          <h3>The Problem</h3>
+
+          <p>
+            Raw seismic data can be difficult to search, compare, and
+            interpret without visual context.
+          </p>
+
+          <div class="problem-line">
+            <span>Raw data</span>
+            <i class="fa-solid fa-arrow-right"></i>
+            <span>Complex interpretation</span>
+          </div>
+
+          <div class="problem-line active-line">
+            <span>Quakescope</span>
+            <i class="fa-solid fa-arrow-right"></i>
+            <span>Clear visual insights</span>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Features Section -->
+    <section class="section" id="features">
+
+      <div class="section-heading reveal">
+        <span class="eyebrow">02 / CAPABILITIES</span>
+        <h2>Built for clarity,<br /><span>discovery, and interaction.</span></h2>
+      </div>
+
+      <div class="features-grid">
+
+        <article class="feature-card feature-large reveal">
+          <div class="feature-number">01</div>
+          <div class="feature-icon">
+            <i class="fa-solid fa-map-location-dot"></i>
+          </div>
+
+          <h3>Interactive Earthquake Map</h3>
+
+          <p>
+            Explore earthquake locations through a dynamic map interface
+            powered by Leaflet and React-Leaflet.
+          </p>
+
+          <div class="feature-visual map-mini">
+            <div class="mini-map-grid"></div>
+            <span class="mini-marker mini-marker-one"></span>
+            <span class="mini-marker mini-marker-two"></span>
+            <span class="mini-marker mini-marker-three"></span>
+          </div>
+        </article>
+
+        <article class="feature-card reveal">
+          <div class="feature-number">02</div>
+          <div class="feature-icon orange-icon">
+            <i class="fa-solid fa-sliders"></i>
+          </div>
+
+          <h3>Dynamic Filtering</h3>
+
+          <p>
+            Narrow earthquake results using magnitude and time-window
+            filters to find relevant events.
+          </p>
+
+          <div class="filter-preview">
+            <div class="filter-row">
+              <span>Magnitude</span>
+              <strong>4.5+</strong>
+            </div>
+            <div class="fake-slider">
+              <span></span>
+            </div>
+            <div class="filter-row">
+              <span>Time Range</span>
+              <strong>24 Hours</strong>
+            </div>
+          </div>
+        </article>
+
+        <article class="feature-card reveal">
+          <div class="feature-number">03</div>
+          <div class="feature-icon purple-icon">
+            <i class="fa-solid fa-circle-info"></i>
+          </div>
+
+          <h3>Event Details</h3>
+
+          <p>
+            Inspect individual events through information such as
+            magnitude, coordinates, significance, and alert levels.
+          </p>
+
+          <div class="detail-preview">
+            <span class="detail-tag">SELECTED EVENT</span>
+            <strong>Magnitude 5.2</strong>
+            <small>Coordinates available</small>
+          </div>
+        </article>
+
+        <article class="feature-card reveal">
+          <div class="feature-number">04</div>
+          <div class="feature-icon green-icon">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+
+          <h3>Reliable Error Handling</h3>
+
+          <p>
+            The application manages network failures, timeouts, and
+            empty result sets to provide a more resilient experience.
+          </p>
+
+          <div class="reliability-list">
+            <span><i class="fa-solid fa-check"></i> Timeout handling</span>
+            <span><i class="fa-solid fa-check"></i> Network error states</span>
+            <span><i class="fa-solid fa-check"></i> Empty results feedback</span>
+          </div>
+        </article>
+
+      </div>
+
+    </section>
+
+    <!-- Workflow Section -->
+    <section class="section workflow-section" id="workflow">
+
+      <div class="section-heading reveal">
+        <span class="eyebrow">03 / HOW IT WORKS</span>
+        <h2>From seismic feed<br /><span>to visual understanding.</span></h2>
+      </div>
+
+      <div class="workflow-container">
+
+        <div class="workflow-line"></div>
+
+        <div class="workflow-step reveal">
+          <div class="step-number">01</div>
+
+          <div class="step-content">
+            <span class="step-label">DATA SOURCE</span>
+            <h3>Fetch earthquake data</h3>
+            <p>
+              Quakescope requests earthquake information from the
+              USGS Earthquake Catalog API.
+            </p>
+          </div>
+
+          <div class="step-icon">
+            <i class="fa-solid fa-cloud-arrow-down"></i>
+          </div>
+        </div>
+
+        <div class="workflow-step reveal">
+          <div class="step-number">02</div>
+
+          <div class="step-content">
+            <span class="step-label">PROCESSING</span>
+            <h3>Process and manage results</h3>
+            <p>
+              The frontend receives GeoJSON data and manages application
+              state, loading states, and error conditions.
+            </p>
+          </div>
+
+          <div class="step-icon">
+            <i class="fa-solid fa-gears"></i>
+          </div>
+        </div>
+
+        <div class="workflow-step reveal">
+          <div class="step-number">03</div>
+
+          <div class="step-content">
+            <span class="step-label">VISUALIZATION</span>
+            <h3>Display events on the map</h3>
+            <p>
+              Earthquake coordinates are represented through interactive
+              map markers and geographic context.
+            </p>
+          </div>
+
+          <div class="step-icon">
+            <i class="fa-solid fa-map"></i>
+          </div>
+        </div>
+
+        <div class="workflow-step reveal">
+          <div class="step-number">04</div>
+
+          <div class="step-content">
+            <span class="step-label">EXPLORATION</span>
+            <h3>Filter and inspect events</h3>
+            <p>
+              Users can refine results and open individual event details
+              to understand seismic activity.
+            </p>
+          </div>
+
+          <div class="step-icon">
+            <i class="fa-solid fa-magnifying-glass-chart"></i>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Technology Section -->
+    <section class="section technology-section" id="technology">
+
+      <div class="section-heading reveal">
+        <span class="eyebrow">04 / TECHNICAL FOUNDATION</span>
+        <h2>Modern tools.<br /><span>Focused implementation.</span></h2>
+      </div>
+
+      <div class="technology-layout">
+
+        <div class="tech-intro reveal">
+          <p>
+            Quakescope uses a modern frontend stack to combine live
+            data retrieval, interactive mapping, responsive design,
+            and client-side state management.
+          </p>
+
+          <a
+            href="https://github.com/techtuber9988/quakescope"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-link"
+          >
+            Explore the repository
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="tech-list reveal">
+
+          <div class="tech-item">
+            <div class="tech-item-icon react-color">
+              <i class="fa-brands fa-react"></i>
+            </div>
+            <div>
+              <h3>React 19</h3>
+              <p>Component-based user interface development</p>
+            </div>
+            <span class="tech-tag">FRONTEND</span>
+          </div>
+
+          <div class="tech-item">
+            <div class="tech-item-icon vite-color">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
+            <div>
+              <h3>Vite</h3>
+              <p>Fast development server and build tooling</p>
+            </div>
+            <span class="tech-tag">TOOLING</span>
+          </div>
+
+          <div class="tech-item">
+            <div class="tech-item-icon tailwind-color">
+              <i class="fa-solid fa-wind"></i>
+            </div>
+            <div>
+              <h3>Tailwind CSS</h3>
+              <p>Utility-first styling and responsive layouts</p>
+            </div>
+            <span class="tech-tag">STYLING</span>
+          </div>
+
+          <div class="tech-item">
+            <div class="tech-item-icon leaflet-color">
+              <i class="fa-solid fa-map"></i>
+            </div>
+            <div>
+              <h3>Leaflet</h3>
+              <p>Interactive geographic visualization</p>
+            </div>
+            <span class="tech-tag">MAPPING</span>
+          </div>
+
+          <div class="tech-item">
+            <div class="tech-item-icon api-color">
+              <i class="fa-solid fa-database"></i>
+            </div>
+            <div>
+              <h3>USGS Earthquake API</h3>
+              <p>External source for earthquake GeoJSON data</p>
+            </div>
+            <span class="tech-tag">DATA</span>
+          </div>
+
+          <div class="tech-item">
+            <div class="tech-item-icon js-color">
+              <i class="fa-brands fa-js"></i>
+            </div>
+            <div>
+              <h3>JavaScript</h3>
+              <p>Application logic and asynchronous data handling</p>
+            </div>
+            <span class="tech-tag">LOGIC</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Scope Section -->
+    <section class="section scope-section" id="scope">
+
+      <div class="section-heading reveal">
+        <span class="eyebrow">05 / PROJECT BOUNDARIES</span>
+        <h2>What Quakescope<br /><span>does—and does not do.</span></h2>
+      </div>
+
+      <div class="scope-grid">
+
+        <div class="scope-card in-scope reveal">
+          <div class="scope-header">
+            <div class="scope-icon">
+              <i class="fa-solid fa-check"></i>
+            </div>
+            <h3>In Scope</h3>
+          </div>
+
+          <ul>
+            <li>Fetching earthquake data from the USGS service</li>
+            <li>Interactive map-based event visualization</li>
+            <li>Magnitude and time-window filtering</li>
+            <li>Individual earthquake information</li>
+            <li>Loading, error, and empty-state handling</li>
+            <li>Responsive and keyboard-accessible interface</li>
+          </ul>
+        </div>
+
+        <div class="scope-card out-scope reveal">
+          <div class="scope-header">
+            <div class="scope-icon">
+              <i class="fa-solid fa-minus"></i>
+            </div>
+            <h3>Out of Scope</h3>
+          </div>
+
+          <ul>
+            <li>User accounts and authentication</li>
+            <li>Saved searches or personalized dashboards</li>
+            <li>Push notifications or WebSocket alerts</li>
+            <li>Independent earthquake prediction</li>
+            <li>Advanced seismic trend calculations</li>
+            <li>Replacement for official emergency information</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="notice-card reveal">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <div>
+          <h3>Important Data Note</h3>
+          <p>
+            Earthquake reports may be delayed or revised. Automatically
+            generated event information can change as more seismic data
+            is analyzed. Quakescope visualizes data supplied by the
+            external USGS service and does not predict earthquakes.
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section cta-section">
+
+      <div class="cta-card reveal">
+        <div class="cta-content">
+          <span class="eyebrow">EXPLORE THE PROJECT</span>
+          <h2>See seismic data<br /><span>in a new way.</span></h2>
+          <p>
+            Visit the live dashboard or explore the source code
+            behind Quakescope.
+          </p>
+
+          <div class="cta-actions">
+            <a
+              href="https://quakescope.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="primary-button"
+            >
+              Open Live App
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+
+            <a
+              href="https://github.com/techtuber9988/quakescope"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="secondary-button"
+            >
+              <i class="fa-brands fa-github"></i>
+              GitHub Repository
+            </a>
+          </div>
+        </div>
+
+        <div class="cta-decoration">
+          <div class="radar-circle radar-one"></div>
+          <div class="radar-circle radar-two"></div>
+          <div class="radar-circle radar-three"></div>
+          <div class="radar-sweep"></div>
+          <div class="radar-dot dot-one"></div>
+          <div class="radar-dot dot-two"></div>
+          <div class="radar-dot dot-three"></div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <a href="#home" class="brand">
+        <span class="brand-icon">
+          <i class="fa-solid fa-wave-square"></i>
+        </span>
+        <span>Quake<span>scope</span></span>
+      </a>
+      <p>Making global seismic data easier to explore.</p>
+    </div>
+
+    <div class="footer-links">
+      <a href="https://quakescope.vercel.app/" target="_blank" rel="noopener noreferrer">
+        Live Demo
+      </a>
+
+      <a href="https://github.com/techtuber9988/quakescope" target="_blank" rel="noopener noreferrer">
+        GitHub
+      </a>
+
+      <a href="#home">Back to top ↑</a>
+    </div>
+
+    <p class="copyright">
+      © <span id="currentYear"></span> Quakescope. Built for seismic data exploration.
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
